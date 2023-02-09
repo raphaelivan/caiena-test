@@ -1,7 +1,10 @@
+require 'twitter'
+
 module Integrations
   class Twitter
     def initialize(params = {current: nil} )
       @params = params
+      @client = initilialize_config
     end
 
     def call
@@ -19,12 +22,20 @@ module Integrations
 
     private
     def create_post
-      msg = parse_msg
-    end
+      @client.update(parse_msg)
+    end    
 
     def parse_msg      
-      "34°C e nublado em em 12/12. Média para os próximos dias: 32°C em 13/12,
-25°C em 14/12, 29°C em 15/12, 33°C em 16/12 e 28°C em 16/12."
+      "It's raining..."
+    end
+
+    def initilialize_config
+      Twitter::REST::Client.new do |config|
+        config.consumer_key        = ENV.fetch('TWITTER_CONSUMER_KEY')
+        config.consumer_secret     = ENV.fetch("TWITTER_CONSUMER_SECRET")
+        config.access_token        = ENV.fetch("TWITTER_ACCESS_TOKEN")
+        config.access_token_secret = ENV.fetch("TWITTER_ACCESS_SECRET")
+      end
     end
 
     def render_success
