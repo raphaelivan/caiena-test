@@ -1,0 +1,23 @@
+/.bundle
+.DS_Store
+.ruby-version
+
+# Ignore all logfiles and tempfiles.
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+
+# Ignore uploaded files in development.
+/storage/*
+!/storage/.keep
+.byebug_history
+
+# Ignore master key for decrypting credentials and more.
+/config/master.key
+
+# Ignore the default SQLite database.
+/config/database.yml
+/config/database.yml
+
+.idea
