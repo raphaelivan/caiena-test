@@ -2,6 +2,13 @@
 .DS_Store
 .ruby-version
 
+# Ignore env variables
+.env
+
+# Ignore database sqlite
+db/*.sqlite3
+
+
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
