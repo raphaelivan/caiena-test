@@ -8,6 +8,8 @@
 # Ignore database sqlite
 db/*.sqlite3
 
+# Ignore twitter keys
+config/local_config_env.yml
 
 # Ignore all logfiles and tempfiles.
 /log/*

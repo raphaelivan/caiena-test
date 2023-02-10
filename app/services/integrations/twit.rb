@@ -1,7 +1,5 @@
-require 'twitter'
-
 module Integrations
-  class Twitter
+  class Twit
     def initialize(params = {current: nil} )
       @params = params
       @client = initilialize_config
@@ -22,7 +20,8 @@ module Integrations
 
     private
     def create_post
-      @client.update(parse_msg)
+      true
+      #@client.update(parse_msg)
     end    
 
     def parse_msg      
@@ -31,10 +30,10 @@ module Integrations
 
     def initilialize_config
       Twitter::REST::Client.new do |config|
-        config.consumer_key        = ENV.fetch('TWITTER_CONSUMER_KEY')
-        config.consumer_secret     = ENV.fetch("TWITTER_CONSUMER_SECRET")
-        config.access_token        = ENV.fetch("TWITTER_ACCESS_TOKEN")
-        config.access_token_secret = ENV.fetch("TWITTER_ACCESS_SECRET")
+        config.consumer_key        = ENV.fetch('twitter_consumer_key')
+        config.consumer_secret     = ENV.fetch("twitter_consumer_secret")
+        config.access_token        = ENV.fetch("twitter_access_token")
+        config.access_token_secret = ENV.fetch("twitter_access_token_secret")
       end
     end
 
