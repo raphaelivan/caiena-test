@@ -3,7 +3,7 @@ class Api::V1::WeathersController < ApplicationController
 	def post_on_twitter
     begin
       if valid_params?
-  			response = Integrations::Twit.new({ current: '29', city: '', nexts: [] }).call
+        response = create_twitter_post({})
         render json: response[:body], status: response[:status]
       else
         render json: { error: 'Please, ' }, status: 301
@@ -14,6 +14,10 @@ class Api::V1::WeathersController < ApplicationController
 	end
 
   private
+  def create_twitter_post(params)
+    Integrations::Twit.new({ current: '29', city: '', nexts: [] }).call
+  end
+
   def valid_params? 
     !params[:id].blank?
   end
