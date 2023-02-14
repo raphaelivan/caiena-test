@@ -1,13 +1,13 @@
 module Integrations
   class Twit
-    def initialize(params = {current: nil} )
+    def initialize(params)
       @params = params
       @client = initilialize_config
     end
 
     def call
       begin
-        if !@params[:current].nil? && create_post
+        if !@params[:msg].nil? && create_post
           render_success
         else
           render_invalid_error
@@ -20,13 +20,8 @@ module Integrations
 
     private
     def create_post
-      true
-      #@client.update(parse_msg)
+      @client.update(@params[:msg])
     end    
-
-    def parse_msg      
-      "It's raining..."
-    end
 
     def initilialize_config
       Twitter::REST::Client.new do |config|

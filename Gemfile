@@ -10,6 +10,8 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem "bootsnap", require: false
 gem "twitter", "~>7.0.0"
 
+gem 'maju' ## GEM criada para integração openweather
+gem 'rest-client'
 
 group :development do 
   gem 'pry'
