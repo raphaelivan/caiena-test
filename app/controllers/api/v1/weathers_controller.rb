@@ -1,23 +1,23 @@
 class Api::V1::WeathersController < ApplicationController
 
-	def forecast
+  def forecast
     begin
       if valid_params?
-        response = Integrations::Weather.new({ 
-          city: params[:city], 
-          days_count: params[:days_count], 
-          lang: params['lang'] || 'pt_br' 
+        response = Integrations::Weather.new({
+          city: params[:city],
+          days_count: params[:days_count],
+          lang: params['lang'] || 'pt_br'
         }).call
 
         create_twitter_post(response) if response[:status] == 200
         render json: :twitter_created, status: response[:status]
       else
-        render json: { error: 'Please, ' }, status: 301
+        render json: { error: 'Você precisa informar uma cidade como parametro. Exemplo: city: Mococa ' }, status: 301
       end
     rescue Exception => error
       render json: { errors: error.as_json }, status: 500
     end
-	end
+  end
 
   private
   def create_twitter_post(response)
@@ -44,7 +44,7 @@ class Api::V1::WeathersController < ApplicationController
     days = {}
 
     if list
-      list.map do |d| 
+      list.map do |d|
         date = Time.at(d['dt']).to_datetime.strftime("%d-%m")
         unless days[date]
           weather = d['weather'].first['description']
@@ -55,7 +55,7 @@ class Api::V1::WeathersController < ApplicationController
     days
   end
 
-  def valid_params? 
+  def valid_params?
     !params[:city].blank? or !params[:lat].blank?
   end
 end
